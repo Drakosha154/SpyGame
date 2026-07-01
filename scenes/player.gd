@@ -1,6 +1,6 @@
 extends CharacterBody3D
-## Игрок от первого лица + сеть. Двигается только владелец (authority);
-## остальные видят его тело через MultiplayerSynchronizer.
+## Игрок от первого лица + сеть.
+## В фазе голосования: наводишь камеру на игрока и жмёшь ЛКМ — голос за него.
 
 @export var speed: float = 5.0
 @export var jump_velocity: float = 4.5
@@ -8,6 +8,8 @@ extends CharacterBody3D
 
 @onready var camera: Camera3D = $Camera3D
 @onready var body: MeshInstance3D = $Body
+@onready var vote_ray: RayCast3D = $Camera3D/RayCast3D
+@onready var vote_label: Label3D = $VoteCount
 
 var min_pitch: float = deg_to_rad(-89.0)
 var max_pitch: float = deg_to_rad(89.0)
@@ -15,26 +17,25 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _enter_tree() -> void:
-	# Владелец узла = игрок с таким peer_id. Имя узла = его id (ставим при спавне).
 	set_multiplayer_authority(str(name).to_int())
 
 
 func _ready() -> void:
+	add_to_group("players")
+	vote_label.visible = false
 	var mine := is_multiplayer_authority()
-	camera.current = mine        # своя камера активна
-	body.visible = not mine      # своё тело прячем, чужие показываем
+	camera.current = mine
+	body.visible = not mine
 	if mine:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		_go_to_spawn("LobbyRoom")     # старт в лобби-комнате (владелец ставит себя сам)
+		vote_ray.add_exception(self)   # луч не цепляет собственное тело
+		_go_to_spawn("LobbyRoom")
 
 
-# Поставить себя на точку спавна нужной комнаты (арена у всех одинаковая).
 func _go_to_spawn(room_name: String) -> void:
-	# Путь от тела: Players -> Arena -> <комната>/Spawn
 	var spawn := get_node_or_null("../../" + room_name + "/Spawn") as Node3D
 	if spawn == null:
 		return
-	# Небольшой сдвиг по id, чтобы игроки не спавнились друг в друге.
 	var offset := float(str(name).to_int() % 5) * 1.2 - 2.4
 	global_position = spawn.global_position + Vector3(offset, 0, 0)
 
@@ -42,19 +43,47 @@ func _go_to_spawn(room_name: String) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
 		return
+
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, min_pitch, max_pitch)
+
 	if event.is_action_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+	# Голосование: ЛКМ по тому, на кого смотришь.
+	if event.is_action_pressed("vote_select") and GameState.current_phase == GameState.Phase.VOTING:
+		var tid := get_aim_target_id()
+		if tid != -1:
+			GameState.cast_vote(tid)
+
+
+# На кого сейчас направлен луч (id игрока) или -1.
+func get_aim_target_id() -> int:
+	if vote_ray != null and vote_ray.is_colliding():
+		var c = vote_ray.get_collider()
+		if c != null and c.is_in_group("players") and c != self:
+			return str(c.name).to_int()
+	return -1
+
+
+# --- Метка с числом голосов над головой ---
+
+func show_vote_label() -> void:
+	vote_label.visible = true
+
+func hide_vote_label() -> void:
+	vote_label.visible = false
+
+func set_vote_count(n: int) -> void:
+	vote_label.text = str(n)
+
 
 func _physics_process(delta: float) -> void:
-	# Чужими телами не управляем — их позицию задаёт синхронизатор.
 	if not is_multiplayer_authority():
 		return
 

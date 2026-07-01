@@ -5,7 +5,7 @@ extends Node
 
 # Заглушки-модели. Когда будут модели из Blender — поменяй пути на .glb.
 const CREW_CUBES := preload("res://assets/models/crew_many_cubes.tscn")
-const SPY_CUBE := preload("res://assets/models/spy_big_cube.tscn")
+const SPY_CUBE := preload("res://assets/models/santa/santa.tscn")
 
 var puzzles: Array[Puzzle] = []
 

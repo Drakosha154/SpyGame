@@ -36,5 +36,20 @@ surface_material_override/0 = SubResource("Mat_body")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -50)
+
+[node name="VoteCount" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+fixed_size = true
+pixel_size = 0.001
+font_size = 200
+outline_size = 40
+modulate = Color(1, 1, 0.3, 1)
+text = "0"
+
 [node name="Synchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("RC_1")

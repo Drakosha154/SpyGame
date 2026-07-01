@@ -1,28 +1,25 @@
 extends Node
 ## Главная сцена — "дирижёр".
-## Поток: меню входа -> 3D-лобби (все бегают) -> хост кнопкой открывает настройки
-## и жмёт "Начать игру" -> цикл фаз матча.
+## Вход -> 3D-лобби -> хост кнопкой открывает настройки и стартует матч -> фазы.
+## Голосование: целишься камерой в игрока и жмёшь ЛКМ; над головами — счёт голосов.
 
 const LOBBY_UI := preload("res://scenes/ui/LobbyUI.tscn")
 const ARENA_SCENE := preload("res://scenes/Arena.tscn")
 const PLAYER_SCENE := preload("res://scenes/Player.tscn")
 const OBJECT_DISPLAY_SCENE := preload("res://scenes/ObjectDisplay.tscn")
 const HUD_SCENE := preload("res://scenes/ui/HUD.tscn")
-const VOTING_UI_SCENE := preload("res://scenes/ui/VotingUI.tscn")
 const HOST_SETTINGS_SCENE := preload("res://scenes/ui/HostSettings.tscn")
 
 var menu: Control
 var arena: Node3D
 var display: ObjectDisplay
 var hud: Control
-var voting_ui: Control
 var settings: Control   # только у хоста
 
 
 func _ready() -> void:
 	menu = LOBBY_UI.instantiate()
 	add_child(menu)
-	# Как только подключились/создали сервер — заходим в мир.
 	NetworkManager.hosted.connect(_enter_world)
 	NetworkManager.connected_ok.connect(_enter_world)
 
@@ -42,25 +39,22 @@ func _enter_world() -> void:
 	hud = HUD_SCENE.instantiate()
 	add_child(hud)
 
-	voting_ui = VOTING_UI_SCENE.instantiate()
-	add_child(voting_ui)
-
 	GameState.role_assigned.connect(_on_role_assigned)
 	GameState.phase_changed.connect(_on_phase_changed)
+	GameState.vote_counts_changed.connect(_on_vote_counts)
 
 	if multiplayer.is_server():
-		# Панель настроек — только у хоста.
 		settings = HOST_SETTINGS_SCENE.instantiate()
 		add_child(settings)
 		settings.start_requested.connect(_on_start_requested)
 		settings.closed.connect(_close_settings)
 		multiplayer.peer_disconnected.connect(_on_peer_left)
-		_spawn_player(1)                 # свой игрок
+		_spawn_player(1)
 	else:
-		_request_spawn.rpc_id(1)         # просим сервер заспавнить нас
+		_request_spawn.rpc_id(1)
 
 
-# --- Динамический спавн игроков (сервер) ---
+# --- Спавн игроков (сервер) ---
 
 @rpc("any_peer", "reliable")
 func _request_spawn() -> void:
@@ -92,29 +86,71 @@ func _on_phase_changed(_level: int, phase: int, _seconds: float) -> void:
 	match phase:
 		GameState.Phase.INSPECT:
 			_teleport_local_player("ViewingRoom")
-			_end_voting()
+			_set_vote_labels(false)
 		GameState.Phase.DISCUSSION:
 			_teleport_local_player("DiscussionRoom")
-			_end_voting()
+			_set_vote_labels(false)
 		GameState.Phase.VOTING:
 			_teleport_local_player("DiscussionRoom")
-			voting_ui.show_voting()
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			_set_vote_labels(true)
 		GameState.Phase.RESULT:
 			_teleport_local_player("DiscussionRoom")
-			_end_voting()
-
-func _end_voting() -> void:
-	voting_ui.hide_voting()
+			_set_vote_labels(false)
+	# Курсор всегда захвачен (голосуем прицеливанием, не мышью).
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
-# --- Кнопка настроек в лобби-комнате (только хост) ---
+# Показать/скрыть 3D-метки голосов над всеми игроками.
+func _set_vote_labels(on: bool) -> void:
+	var players_node := arena.get_node_or_null("Players")
+	if players_node == null:
+		return
+	for p in players_node.get_children():
+		if on:
+			p.show_vote_label()
+			p.set_vote_count(0)
+		else:
+			p.hide_vote_label()
+
+# Пришли свежие числа голосов — проставляем над головами.
+func _on_vote_counts(counts: Dictionary) -> void:
+	var players_node := arena.get_node_or_null("Players")
+	if players_node == null:
+		return
+	for p in players_node.get_children():
+		var id := str(p.name).to_int()
+		p.set_vote_count(int(counts.get(id, 0)))
+
+
+# --- Каждый кадр: прицел при голосовании / кнопка настроек хоста ---
 
 func _process(_dt: float) -> void:
-	if settings == null:
+	if arena == null:
 		return
-	# Настройки доступны только пока не начался матч и панель закрыта.
+	if GameState.current_phase == GameState.Phase.VOTING:
+		hud.show_crosshair(true)
+		_update_vote_aim()
+	else:
+		hud.show_crosshair(false)
+		_update_host_button()
+
+
+func _update_vote_aim() -> void:
+	var p := _local_player()
+	if p == null:
+		hud.hide_prompt()
+		return
+	var tid: int = p.get_aim_target_id()
+	if tid != -1:
+		hud.show_prompt("ЛКМ — голос за: %s" % str(NetworkManager.players.get(tid, "?")))
+	else:
+		hud.show_prompt("Наведись на подозреваемого")
+
+
+func _update_host_button() -> void:
+	if settings == null:
+		hud.hide_prompt()
+		return
 	if GameState.current_phase != GameState.Phase.LOBBY or settings.visible:
 		hud.hide_prompt()
 		return
@@ -126,6 +162,9 @@ func _process(_dt: float) -> void:
 			_open_settings()
 	else:
 		hud.hide_prompt()
+
+
+# --- Настройки хоста ---
 
 func _open_settings() -> void:
 	hud.hide_prompt()

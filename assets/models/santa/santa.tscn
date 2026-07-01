@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://btmc6n5lnxgph"]
+
+[ext_resource type="PackedScene" uid="uid://ds88ayu0vtd3u" path="res://assets/models/santa/santa.fbx" id="1_ba8xb"]
+[ext_resource type="Texture2D" uid="uid://do627q7pwmo8c" path="res://assets/models/santa/santa.png" id="2_dbymx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbymx"]
+albedo_texture = ExtResource("2_dbymx")
+
+[node name="santa" unique_id=1113440569 instance=ExtResource("1_ba8xb")]
+transform = Transform3D(0.505, 0, 0, 0, 0.505, 0, 0, 0, 0.505, 0, 1.3472755, 0.5307802)
+
+[node name="Cube" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(372727641) index="0" unique_id=433233469]
+surface_material_override/0 = SubResource("StandardMaterial3D_dbymx")

@@ -30,6 +30,7 @@ signal phase_changed(level: int, phase: int, seconds: float)
 signal level_resolved(spy_name: String, accused_name: String, crew_won: bool, crew_score: int, spy_score: int)
 signal match_over(winner: String, crew_score: int, spy_score: int)
 signal revote_started(tied_names: String)
+signal vote_counts_changed(counts: Dictionary)
 
 
 # --- СЕРВЕР: весь матч ---
@@ -157,6 +158,7 @@ func is_match_over() -> bool:
 func cast_vote(target_id: int) -> void:
 	if multiplayer.is_server():
 		_server_votes[multiplayer.get_unique_id()] = target_id
+		_server_broadcast_counts()
 	else:
 		submit_vote.rpc_id(1, target_id)
 
@@ -165,8 +167,20 @@ func cast_vote(target_id: int) -> void:
 func submit_vote(target_id: int) -> void:
 	if not multiplayer.is_server():
 		return
-	var voter := multiplayer.get_remote_sender_id()
-	_server_votes[voter] = target_id
+	_server_votes[multiplayer.get_remote_sender_id()] = target_id
+	_server_broadcast_counts()
+
+# Сервер считает голоса и рассылает всем актуальные числа.
+func _server_broadcast_counts() -> void:
+	var counts: Dictionary = {}
+	for voter in _server_votes:
+		var t: int = _server_votes[voter]
+		counts[t] = int(counts.get(t, 0)) + 1
+	_update_vote_counts.rpc(counts)
+
+@rpc("authority", "call_local", "reliable")
+func _update_vote_counts(counts: Dictionary) -> void:
+	vote_counts_changed.emit(counts)
 
 
 # --- КЛИЕНТ: приходит от сервера ---

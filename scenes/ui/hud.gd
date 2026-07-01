@@ -6,6 +6,7 @@ extends Control
 @onready var top_label: Label = $TopLabel
 @onready var center_label: Label = $CenterLabel
 @onready var interact_prompt: Label = $InteractPrompt
+@onready var crosshair: Label = $Crosshair
 
 var time_left: float = 0.0
 var phase_name: String = ""
@@ -51,6 +52,9 @@ func show_prompt(text: String) -> void:
 
 func hide_prompt() -> void:
 	interact_prompt.text = ""
+
+func show_crosshair(on: bool) -> void:
+	crosshair.visible = on
 
 
 func _phase_name(phase: int) -> String:
