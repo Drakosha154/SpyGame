@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://chu4qulqawhvh"]
+
+[ext_resource type="ArrayMesh" uid="uid://dfs8l0l2tgqxf" path="res://assets/models/village/mug/Mug.obj" id="1_2erwq"]
+[ext_resource type="Texture2D" uid="uid://d2uegcq0ghqwc" path="res://assets/models/village/mug/Mug_Base_color_1001.png" id="2_iny1c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diakl"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmjrc"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cdg7"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5j73e"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ksj0i"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uegqo"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16ksu"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q36"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0m40"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_04gfg"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asj3e"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsjwp"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhshy"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_horjw"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4yjo"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dtv25"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go468"]
+albedo_texture = ExtResource("2_iny1c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oov02"]
+albedo_texture = ExtResource("2_iny1c")
+
+[node name="Mug" type="Node3D" unique_id=1706221758]
+transform = Transform3D(0.385, 0, 0, 0, 0.385, 0, 0, 0, 0.385, 0, 0, 0)
+
+[node name="Mug" type="MeshInstance3D" parent="." unique_id=2013543976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028662324, 1.4819698, 0.11519766)
+mesh = ExtResource("1_2erwq")
+surface_material_override/0 = SubResource("StandardMaterial3D_diakl")
+surface_material_override/1 = SubResource("StandardMaterial3D_hmjrc")
+surface_material_override/2 = SubResource("StandardMaterial3D_8cdg7")
+surface_material_override/3 = SubResource("StandardMaterial3D_5j73e")
+surface_material_override/4 = SubResource("StandardMaterial3D_ksj0i")
+surface_material_override/5 = SubResource("StandardMaterial3D_uegqo")
+surface_material_override/6 = SubResource("StandardMaterial3D_16ksu")
+surface_material_override/7 = SubResource("StandardMaterial3D_x7q36")
+surface_material_override/8 = SubResource("StandardMaterial3D_n0m40")
+surface_material_override/9 = SubResource("StandardMaterial3D_04gfg")
+surface_material_override/10 = SubResource("StandardMaterial3D_asj3e")
+surface_material_override/11 = SubResource("StandardMaterial3D_gsjwp")
+surface_material_override/12 = SubResource("StandardMaterial3D_vhshy")
+surface_material_override/13 = SubResource("StandardMaterial3D_horjw")
+surface_material_override/14 = SubResource("StandardMaterial3D_b4yjo")
+surface_material_override/15 = SubResource("StandardMaterial3D_dtv25")
+surface_material_override/16 = SubResource("StandardMaterial3D_go468")
+surface_material_override/17 = SubResource("StandardMaterial3D_oov02")

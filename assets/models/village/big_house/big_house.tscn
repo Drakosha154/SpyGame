@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b2w0jhg2vuvs2"]
+
+[ext_resource type="PackedScene" uid="uid://d3tkaymb7xkux" path="res://assets/models/village/big_house/Big_House.fbx" id="1_uph1v"]
+[ext_resource type="Texture2D" uid="uid://beuau3thre7e7" path="res://assets/models/village/big_house/House_Texture.png" id="2_6v63x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6v63x"]
+albedo_texture = ExtResource("2_6v63x")
+
+[node name="Big_House" unique_id=1533492109 instance=ExtResource("1_uph1v")]
+transform = Transform3D(26.535, 0, 0, 0, 26.535, 0, 0, 0, 26.535, 0, 0, 0)
+
+[node name="pCube176" parent="." index="225" unique_id=57237695]
+surface_material_override/0 = SubResource("StandardMaterial3D_6v63x")

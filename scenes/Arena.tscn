@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Room.tscn" id="1_room"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ped"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_ped"]
+albedo_color = Color(0.5, 0.5, 0.55, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ped"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="BoxMesh" id="Mesh_button"]
+size = Vector3(0.6, 1.2, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="Mat_button"]
+albedo_color = Color(0.2, 0.9, 0.35, 1)
+emission_enabled = true
+emission = Color(0.1, 0.5, 0.2, 1)
+
+[node name="Arena" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0.8, 0, -0.8, 0.6, 0, 10, 0)
+shadow_enabled = true
+
+[node name="LobbyRoom" parent="." instance=ExtResource("1_room")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 0)
+
+[node name="ViewingRoom" parent="." instance=ExtResource("1_room")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DiscussionRoom" parent="." instance=ExtResource("1_room")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 0)
+
+[node name="Pedestal" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pedestal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_ped")
+surface_material_override/0 = SubResource("Mat_ped")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pedestal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_ped")
+
+[node name="LobbyButton" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0.6, 0)
+mesh = SubResource("Mesh_button")
+surface_material_override/0 = SubResource("Mat_button")
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/Player.tscn")
+spawn_path = NodePath("../Players")

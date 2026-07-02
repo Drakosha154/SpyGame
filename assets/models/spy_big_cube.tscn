@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="BoxMesh" id="Box_big"]
+size = Vector3(0.9, 0.9, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="Mat_cube"]
+albedo_color = Color(0.3, 0.55, 0.9, 1)
+
+[node name="SpyBigCube" type="Node3D"]
+
+[node name="BigCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("Box_big")
+surface_material_override/0 = SubResource("Mat_cube")

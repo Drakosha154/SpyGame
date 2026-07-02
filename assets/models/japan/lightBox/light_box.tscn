@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ca7ss8giq754o"]
+
+[ext_resource type="PackedScene" uid="uid://dk8k2go7dnmkt" path="res://assets/models/japan/lightBox/LightBox.fbx" id="1_eaapw"]
+
+[node name="LightBox" unique_id=295219439 instance=ExtResource("1_eaapw")]
+
+[node name="LightBox" parent="." index="0" unique_id=318487284]
+transform = Transform3D(1.005, 0, 0, 0, 1.005, 0, 0, 0, 1.005, 0, 0, 0)

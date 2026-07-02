@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b2wwnixrc5e70"]
+
+[ext_resource type="PackedScene" uid="uid://bd3s5dux8asp7" path="res://assets/models/japan/counterA/CounterA.fbx" id="1_k67dg"]
+
+[node name="CounterA" unique_id=1607742823 instance=ExtResource("1_k67dg")]
+
+[node name="CounterA" parent="." index="0" unique_id=1812285186]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0.6766057, 0, 0.27660882)

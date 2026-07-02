@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="BoxMesh" id="Box_small"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_cube"]
+albedo_color = Color(0.3, 0.55, 0.9, 1)
+
+[node name="CrewManyCubes" type="Node3D"]
+
+[node name="Cube1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.15, -0.18)
+mesh = SubResource("Box_small")
+surface_material_override/0 = SubResource("Mat_cube")
+
+[node name="Cube2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.15, -0.18)
+mesh = SubResource("Box_small")
+surface_material_override/0 = SubResource("Mat_cube")
+
+[node name="Cube3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.15, 0.18)
+mesh = SubResource("Box_small")
+surface_material_override/0 = SubResource("Mat_cube")
+
+[node name="Cube4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.15, 0.18)
+mesh = SubResource("Box_small")
+surface_material_override/0 = SubResource("Mat_cube")
+
+[node name="Cube5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.5, -0.18)
+mesh = SubResource("Box_small")
+surface_material_override/0 = SubResource("Mat_cube")
+
+[node name="Cube6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.5, -0.18)
+mesh = SubResource("Box_small")
+surface_material_override/0 = SubResource("Mat_cube")
+
+[node name="Cube7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.5, 0.18)
+mesh = SubResource("Box_small")
+surface_material_override/0 = SubResource("Mat_cube")
+
+[node name="Cube8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.5, 0.18)
+mesh = SubResource("Box_small")
+surface_material_override/0 = SubResource("Mat_cube")

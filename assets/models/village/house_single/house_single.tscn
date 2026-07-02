@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ccpyoaso4d0g2"]
+
+[ext_resource type="PackedScene" uid="uid://4jrhlcofmc1d" path="res://assets/models/village/house_single/House_Single.fbx" id="1_pr4p1"]
+[ext_resource type="Texture2D" uid="uid://blfb37y7skxk2" path="res://assets/models/village/house_single/House_Texture.png" id="2_qbneq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elqb8"]
+albedo_texture = ExtResource("2_qbneq")
+
+[node name="House_Single" unique_id=2078814191 instance=ExtResource("1_pr4p1")]
+transform = Transform3D(1.38, 0, 0, 0, 1.38, 0, 0, 0, 1.38, 0, 0, 0)
+
+[node name="polySurface263" parent="." index="90" unique_id=2083252431]
+surface_material_override/0 = SubResource("StandardMaterial3D_elqb8")

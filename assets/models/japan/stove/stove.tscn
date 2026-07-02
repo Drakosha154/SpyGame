@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bgkfec7o8y4wd"]
+
+[ext_resource type="PackedScene" uid="uid://d3vq4qvewf8hb" path="res://assets/models/japan/stove/Stove.fbx" id="1_178la"]
+
+[node name="Stove" unique_id=609646455 instance=ExtResource("1_178la")]
+transform = Transform3D(1.405, 0, 0, 0, 1.405, 0, 0, 0, 1.405, 0, 0, 0)
+
+[node name="Stove_Root" parent="." index="0" unique_id=1778766121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
