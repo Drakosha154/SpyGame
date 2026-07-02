@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bfcf0cutawwv7"]
+
+[ext_resource type="PackedScene" uid="uid://culrqtsjrpyfq" path="res://assets/models/japan/banner/Standing Banner.fbx" id="1_ccq54"]
+
+[node name="Standing Banner" unique_id=1563495957 instance=ExtResource("1_ccq54")]
+
+[node name="Standing Banner" parent="." index="0" unique_id=1160404071]
+transform = Transform3D(0.755, 0, 0, 0, 0.755, 0, 0, 0, 0.755, 0, 0, 0)

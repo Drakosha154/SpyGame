@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b8ymtmivqadul"]
+
+[ext_resource type="PackedScene" uid="uid://dwq3guw768rw8" path="res://assets/models/village/well/Village_Well.fbx" id="1_yomul"]
+[ext_resource type="Texture2D" uid="uid://cwbpof6yh2t5h" path="res://assets/models/village/well/House_Texture.png" id="2_gqheo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0fyd"]
+albedo_texture = ExtResource("2_gqheo")
+
+[node name="Village_Well" unique_id=1203538431 instance=ExtResource("1_yomul")]
+transform = Transform3D(0.405, 0, 0, 0, 0.405, 0, 0, 0, 0.405, 0, 0, 0)
+
+[node name="polySurface72" parent="." index="76" unique_id=815085043]
+surface_material_override/0 = SubResource("StandardMaterial3D_d0fyd")

@@ -175,9 +175,9 @@ func _close_settings() -> void:
 	settings.visible = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _on_start_requested(levels: int) -> void:
+func _on_start_requested(levels: int, difficulty: int) -> void:
 	_close_settings()
-	NetworkManager.start_match(levels)
+	NetworkManager.start_match(levels, difficulty)
 
 
 # --- Вспомогательное ---

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dgb4ff7rgkpa3"]
+
+[ext_resource type="PackedScene" uid="uid://bbbdem8pngt0h" path="res://assets/models/japan/beer/BeerCrate_Green.fbx" id="1_m7q8y"]
+
+[node name="BeerCrate_Green" unique_id=1824511559 instance=ExtResource("1_m7q8y")]
+
+[node name="BeerCrate_Green" parent="." index="0" unique_id=1242712453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

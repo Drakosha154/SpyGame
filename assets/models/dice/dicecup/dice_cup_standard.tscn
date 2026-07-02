@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dnr56nn3nob7y"]
+
+[ext_resource type="PackedScene" uid="uid://d02pgqlesur3l" path="res://assets/models/dice/dicecup/diceCup_standard.fbx" id="1_jd5rh"]
+[ext_resource type="Texture2D" uid="uid://bg5ej1vybs5y3" path="res://assets/models/dice/dicecup/dceCup_standard_normal.png" id="2_a186g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fxa5"]
+albedo_texture = ExtResource("2_a186g")
+
+[node name="diceCup_standard" unique_id=1363192592 instance=ExtResource("1_jd5rh")]
+
+[node name="diceCup_standard" parent="." index="0" unique_id=1884391846]
+surface_material_override/0 = SubResource("StandardMaterial3D_4fxa5")

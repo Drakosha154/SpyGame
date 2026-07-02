@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://btemarkcq6grd"]
+
+[ext_resource type="PackedScene" uid="uid://613nfb62bkkb" path="res://assets/models/japan/knife/Knife.fbx" id="1_fi1m2"]
+
+[node name="Knife" unique_id=507388483 instance=ExtResource("1_fi1m2")]
+
+[node name="Knife" parent="." index="0" unique_id=48407301]
+transform = Transform3D(4.655, 0, 0, 0, 4.655, 0, 0, 0, 4.655, 0.18724114, 0, 0)

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://btw5k5s3g8axw"]
+
+[ext_resource type="PackedScene" uid="uid://tsjkbr5bn0wm" path="res://assets/models/village/signpost/Signpost.fbx" id="1_tg55i"]
+[ext_resource type="Texture2D" uid="uid://c8gay46dsa0oa" path="res://assets/models/village/signpost/House_Texture.png" id="2_a2yx5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tg55i"]
+albedo_texture = ExtResource("2_a2yx5")
+
+[node name="Signpost" unique_id=1467747115 instance=ExtResource("1_tg55i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.073563755, 0)
+
+[node name="pCube38" parent="." index="88" unique_id=598028912]
+transform = Transform3D(-4.112591, 0, -2.0362027, 0, 4.5890656, 0, 2.0362027, 0, -4.112591, 0.0018271357, 0.55947983, -0.07164183)
+surface_material_override/0 = SubResource("StandardMaterial3D_tg55i")

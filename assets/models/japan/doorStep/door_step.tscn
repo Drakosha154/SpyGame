@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bsacee46aub2l"]
+
+[ext_resource type="PackedScene" uid="uid://ejq8huuhb30l" path="res://assets/models/japan/doorStep/DoorStep.fbx" id="1_cblf6"]
+
+[node name="DoorStep" unique_id=236764594 instance=ExtResource("1_cblf6")]
+
+[node name="DoorStep" parent="." index="0" unique_id=223197193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

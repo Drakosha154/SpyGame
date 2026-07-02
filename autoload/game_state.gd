@@ -13,6 +13,9 @@ const RESULT_TIME := 10.0
 var total_levels: int = 99
 var current_level: int = 0
 
+# Сложность: 0 = любая, иначе 1..3 (берём загадки только этой сложности).
+var difficulty: int = 0
+
 # СЕКРЕТ СЕРВЕРА: кто шпион на этом уровне.
 var spy_id: int = -1
 
@@ -68,7 +71,7 @@ func _server_match_loop() -> void:
 	_apply_match_over.rpc(winner, crew_score, spy_score)
 
 func _server_setup_level() -> void:
-	var idx := randi() % PuzzleLibrary.puzzles.size()
+	var idx := _server_pick_puzzle_index()
 	spy_id = _pick_spy()
 	print("[Сервер] Уровень %d, шпион = peer %d" % [current_level, spy_id])
 	for id in NetworkManager.players:
@@ -148,6 +151,17 @@ func _names_of(ids: Array) -> String:
 func _pick_spy() -> int:
 	var ids: Array = NetworkManager.players.keys()
 	return ids[randi() % ids.size()]
+
+
+# Выбрать индекс загадки в общем списке с учётом сложности.
+func _server_pick_puzzle_index() -> int:
+	var pool: Array = PuzzleLibrary.puzzles
+	if difficulty != 0:
+		var filtered := PuzzleLibrary.by_difficulty(difficulty)
+		if not filtered.is_empty():
+			pool = filtered   # есть загадки нужной сложности — берём из них
+	var chosen: Puzzle = pool[randi() % pool.size()]
+	return PuzzleLibrary.puzzles.find(chosen)   # индекс в общем списке (одинаков у всех)
 
 func is_match_over() -> bool:
 	return current_level >= total_levels

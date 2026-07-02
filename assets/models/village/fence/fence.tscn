@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b078afxospa7u"]
+
+[ext_resource type="PackedScene" uid="uid://hgkahyes8od7" path="res://assets/models/village/fence/Fence.fbx" id="1_bqlxo"]
+[ext_resource type="Texture2D" uid="uid://cwpiwblwwmqw8" path="res://assets/models/village/fence/House_Texture.png" id="2_jq742"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jq742"]
+albedo_texture = ExtResource("2_jq742")
+
+[node name="Fence" unique_id=1509229233 instance=ExtResource("1_bqlxo")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="pCube6" parent="." index="9" unique_id=859316515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03349881, 0.663522, -0.0064315796)
+surface_material_override/0 = SubResource("StandardMaterial3D_jq742")

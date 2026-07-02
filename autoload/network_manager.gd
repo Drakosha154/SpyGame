@@ -110,15 +110,16 @@ func _update_players(new_players: Dictionary) -> void:
 
 # --- Старт матча ---
 
-# Хост запускает матч (из настроек в лобби-комнате), передавая число уровней.
-func start_match(levels: int) -> void:
+# Хост запускает матч (из настроек в лобби-комнате): число уровней + сложность.
+func start_match(levels: int, difficulty: int) -> void:
 	if multiplayer.is_server():
-		_start_game.rpc(levels)
+		_start_game.rpc(levels, difficulty)
 
 # call_local — выполнится и на сервере, и на всех клиентах.
 @rpc("authority", "call_local", "reliable")
-func _start_game(levels: int) -> void:
+func _start_game(levels: int, difficulty: int) -> void:
 	GameState.total_levels = levels
+	GameState.difficulty = difficulty
 	if multiplayer.is_server():
 		GameState.server_start_match()
 	game_started.emit()

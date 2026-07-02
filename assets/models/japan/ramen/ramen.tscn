@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bcmj5gavmxrfc"]
+
+[ext_resource type="PackedScene" uid="uid://c2gads2yt0226" path="res://assets/models/japan/ramen/Ramen.fbx" id="1_uw1gp"]
+
+[node name="Ramen" unique_id=1786153169 instance=ExtResource("1_uw1gp")]
+
+[node name="Ramen" parent="." index="0" unique_id=402121962]
+transform = Transform3D(3.205, 0, 0, 0, 3.205, 0, 0, 0, 3.205, 0, 0, 0)
