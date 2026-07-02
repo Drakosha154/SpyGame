@@ -39,7 +39,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -50)
 
-<<<<<<< HEAD
 [node name="NameLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 billboard = 1
@@ -50,21 +49,15 @@ outline_size = 30
 modulate = Color(1, 1, 1, 1)
 text = ""
 
-=======
->>>>>>> fc1895653c203d6d92dfb0c7dd617266007d9131
 [node name="VoteCount" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
 visible = false
 billboard = 1
 no_depth_test = true
-<<<<<<< HEAD
-pixel_size = 0.0012
-=======
 fixed_size = true
 pixel_size = 0.001
->>>>>>> fc1895653c203d6d92dfb0c7dd617266007d9131
-font_size = 200
-outline_size = 40
+font_size = 48
+outline_size = 10
 modulate = Color(1, 1, 0.3, 1)
 text = "0"
 
